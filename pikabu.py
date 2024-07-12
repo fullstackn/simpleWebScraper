@@ -18,7 +18,7 @@ def get_tag_html(tag: Tag):
 
 def wait_for_page_load(driver, timeout=30):
     WebDriverWait(driver, timeout).until(
-        lambda driver: driver.execute_script("return document.readyState") == "complete"
+        lambda l_driver: l_driver.execute_script("return document.readyState") == "complete"
     )
 
 
