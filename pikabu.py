@@ -10,7 +10,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 TAGS = 'Politics,Mars'
 OUTPUT_FILENAME = 'out.csv'
-
+fields_list = ['title', 'text', 'tags', 'comments', 'datetime', 'author']
 
 def get_tag_html(tag: Tag):
     return ''.join([i.decode() if type(i) is Tag else i for i in tag.contents])
@@ -53,7 +53,13 @@ def process_stories(story_list):
         else:
             title = ''
         story_tags = [t.attrs['data-tag'] for t in story.find(class_='story__tags').find_all(name='a')]
+
+        n_comments = story.find(class_='story__comments-link-count').text
+        dt_tag = story.find(class_='story__datetime')
+        story_date = dt_tag.attrs['datetime']
         text_tag = story.find(class_='story-block_type_text')
+        author = story.find(class_='story__user-link').attrs['data-name']
+
         if text_tag is not None:
             text = story.find(class_='story-block_type_text').text
         else:
@@ -62,6 +68,9 @@ def process_stories(story_list):
             'title': title,
             'text': text,
             'tags': story_tags,
+            'comments': n_comments,
+            'datetime': story_date,
+            'author': author
         })
     return story_data
 
@@ -82,6 +91,6 @@ if __name__ == '__main__':
     # write result to csv
     with open(output_filename, 'w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(['title', 'text', 'tags'])
+        writer.writerow(fields_list)
         for item in processed:
-            writer.writerow([item.get('title'), item.get('text'), item['tags']])
+            writer.writerow([item.get(f) for f in fields_list])
