@@ -1,4 +1,4 @@
-Script read articles (title, text, tags) from https://pikabu.ru/ , filtered by tags.
+Script read articles (title, text, some other metadata) from https://pikabu.ru/ , filtered by tags.
 
 Requires Python3. 
 
