@@ -1,4 +1,4 @@
-Script read articles (title, text, tags) from https://pikabu.ru/ , filtered by tags
+Script read articles (title, text, tags) from https://pikabu.ru/ , filtered by tags.
 
 For installing dependencies run 
 ```
