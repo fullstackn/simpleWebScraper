@@ -75,7 +75,7 @@ if __name__ == '__main__':
     output_filename = args.output_filename or OUTPUT_FILENAME
     tags = args.tags or TAGS
 
-    # read Tag list from site
+    # read list of stories from the site
     stories = get_stories(f'https://pikabu.ru/tag/{tags}')
     # process this list to get json
     processed = process_stories(stories)
